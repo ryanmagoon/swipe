@@ -5,11 +5,9 @@ import Ball from './src/Ball'
 export default class App extends React.Component {
   render() {
     return (
-      <SafeAreaView>
         <View style={styles.container}>
           <Ball></Ball>
         </View>
-      </SafeAreaView>
     );
   }
 }

@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import { View, Animated, StyleSheet } from 'react-native'
+import { Dimensions, View, Animated, StyleSheet } from 'react-native'
+
+const { height, width } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
   ball: {
@@ -16,7 +18,13 @@ class Ball extends Component {
     this.position = new Animated.ValueXY(0, 0)
     Animated.sequence([
       Animated.spring(this.position, {
-        toValue: { x: 200, y: 500 },
+        toValue: { x: width - 60, y: 0 },
+      }),
+      Animated.spring(this.position, {
+        toValue: { x: width - 60, y: height - 60 },
+      }),
+      Animated.spring(this.position, {
+        toValue: { x: 0, y: height - 60 },
       }),
       Animated.spring(this.position, {
         toValue: { x: 0, y: 0 }
