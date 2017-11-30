@@ -14,9 +14,14 @@ const styles = StyleSheet.create({
 class Ball extends Component {
   componentWillMount() {
     this.position = new Animated.ValueXY(0, 0)
-    Animated.spring(this.position, {
-      toValue: { x: 200, y: 500 }
-    }).start()
+    Animated.sequence([
+      Animated.spring(this.position, {
+        toValue: { x: 200, y: 500 },
+      }),
+      Animated.spring(this.position, {
+        toValue: { x: 0, y: 0 }
+      })
+    ]).start()
   }
 
   render() {
