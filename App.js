@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native'
+import { Card, Button } from 'react-native-elements'
 import Deck from './src/Deck'
 
 const DATA = [
@@ -13,7 +14,22 @@ const DATA = [
   { id: 8, text: 'Card #8', uri: 'http://imgs.abduzeedo.com/files/paul0v2/unsplash/unsplash-01.jpg' }
 ]
 
-const renderCard = item => <Text>{item.text}</Text>
+const renderCard = item => (
+  <Card
+    key={item.id}
+    title={item.text}
+    image={{ uri: item.uri }}
+  >
+    <Text style={{ marginBottom: 10 }}>
+      I can customise the Card further.
+    </Text>
+    <Button
+      icon={{ name: 'code' }}
+      backgroundColor="#03A9F4"
+      title="View Now"
+    />
+  </Card>
+)
 
 const styles = StyleSheet.create({
   container: {
