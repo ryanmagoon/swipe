@@ -37,6 +37,12 @@ class Deck extends Component {
     }
   }
 
+  resetPosition() {
+    Animated.spring(this.state.position, {
+      toValue: { x: 0, y: 0 }
+    }).start()
+  }
+
   renderCards() {
     return this.props.data.map((item, index) => {
       if (index === 0) {
