@@ -31,6 +31,18 @@ const renderCard = item => (
   </Card>
 )
 
+const renderNoMoreCards = () => (
+  <Card title="All Done!">
+    {/* <Text style={{ marginBottom: 10 }}>
+        There's no more content here
+    </Text> */}
+    <Button
+      backgroundColor="#03A9F4"
+      title="Get more!"
+    />
+  </Card>
+)
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -43,6 +55,7 @@ const App = () => (
     <Deck
       data={DATA}
       renderCard={renderCard}
+      renderNoMoreCards={renderNoMoreCards}
     />
   </SafeAreaView>
 )
