@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import {
   Animated,
   Dimensions,
+  LayoutAnimation,
   PanResponder,
+  UIManager,
   View
 } from 'react-native'
 
@@ -45,6 +47,13 @@ class Deck extends Component {
     })
 
     this.state = { panResponder, position, index: 0 }
+  }
+
+  componentWillUpdate() {
+    // Android compatibility
+    UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true)
+
+    LayoutAnimation.spring()
   }
 
   onSwipeComplete(direction) {
@@ -93,7 +102,11 @@ class Deck extends Component {
 
   renderCards() {
     if (this.state.index >= this.props.data.length) {
-      return this.props.renderNoMoreCards()
+      return (
+        <View style={{ marginTop: 0.10 * Dimensions.get('window').height }}>
+          {this.props.renderNoMoreCards()}
+        </View>
+      )
     }
     return this.props.data.map((item, index) => {
       if (index === this.state.index) {
