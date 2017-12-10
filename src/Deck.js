@@ -10,6 +10,14 @@ const SCREEN_WIDTH = Dimensions.get('window').width
 const SWIPE_THRESHOLD = 0.25 * SCREEN_WIDTH
 const SWIPE_OUT_DURATION = 250
 
+const styles = {
+  cardStyle: {
+    position: 'absolute',
+    width: SCREEN_WIDTH,
+    marginTop: 0.10 * Dimensions.get('window').height
+  }
+}
+
 class Deck extends Component {
   static defaultProps = {
     onSwipeRight: () => {},
@@ -92,16 +100,23 @@ class Deck extends Component {
         return (
           <Animated.View
             key={item.id}
-            style={this.getCardStyle()}
+            style={[this.getCardStyle(), styles.cardStyle]}
             {...this.state.panResponder.panHandlers}
           >
             {this.props.renderCard(item)}
           </Animated.View>
         )
       } else if (index > this.state.index) {
-        return this.props.renderCard(item)
+        return (
+          <Animated.View
+            key={item.id}
+            style={[styles.cardStyle, { top: 10 * (index - this.state.index) }]}
+          >
+            {this.props.renderCard(item)}
+          </Animated.View>
+        )
       }
-    })
+    }).reverse()
   }
 
   render() {
